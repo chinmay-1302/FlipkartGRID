@@ -11,17 +11,17 @@ This repo is to maintain the DL models & python application of our team for the 
 - Barcode Detection Model
 
 ### ⚙️ Working
-1. Box Cart is placed below camera
-2. Python application Begins
-3. OpenCV takes snapshot of trolley
-4. Trolley snapshot is passed to Box Detection Model (BDM)
-5. BDM checks if cart contains any boxes
+01. Box Cart is placed below camera
+02. Python application Begins
+03. OpenCV takes snapshot of trolley
+04. Trolley snapshot is passed to Box Detection Model (BDM)
+05. BDM checks if cart contains any boxes
     1. If False, go to step 16
     2. If True, continue
-6. BDM identifies the "Best Box", the box with the highest confidence level out of all the boxes in the trolley
-7. BDM sends the XY coordinates of the "Best Box" to Arduino
-8. Wait till the robot lifts the "Best Box" and sends a response back to python application using Arduino
-9. When response is received, OpenCV takes snapshot of the lifted "Best Box"
+06. BDM identifies the "Best Box", the box with the highest confidence level out of all the boxes in the trolley
+07. BDM sends the XY coordinates of the "Best Box" to Arduino
+08. Wait till the robot lifts the "Best Box" and sends a response back to python application using Arduino
+09. When response is received, OpenCV takes snapshot of the lifted "Best Box"
 10. Box snapshot is passed to Barcode Detection Model (BDSM)
 11. BDSM detects if the upper side of the box contains the barcode or not and stores the result as True or False
 12. If False, then
