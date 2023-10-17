@@ -6,7 +6,7 @@ import ultralytics
 from ultralytics import YOLO
 from roboflow import Roboflow
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(3, 1280)  # 3 = width
 cap.set(4, 720)  # 4 = height
 
@@ -23,10 +23,10 @@ while True:
     cv2.imshow('frame', frame)
 
     # loop for box detection
-    # print(model_box.predict(frame, confidence=80, overlap=30).json())
+    print(model_box.predict(frame, confidence=50, overlap=30).json())
     
     # loop for barcode detection
-    print(model_barcode.predict(frame, confidence=80, overlap=30).json())
+    # print(model_barcode.predict(frame, confidence=80, overlap=30).json())
 
     if cv2.waitKey(1) == ord('q'):
         break
