@@ -21,13 +21,17 @@ cap.set(4, 400)  # 4 = height
 model_box = YOLO('BDM\\best.pt')
 classNames = ['box']
 
+model_barcode = YOLO('BDSM\\best.pt')
+classNames = ['0']
+
 # variables for box photo & barcode photo
 box_capture = True
 barcode_capture = True
 
 while True:
     success, img = cap.read()
-    results = model_box(img, stream=True)
+    # results = model_box(img, stream=True)
+    results = model_barcode(img, stream=True)
     for r in results:
         boxes = r.boxes
         for box in boxes:
