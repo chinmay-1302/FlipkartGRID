@@ -8,11 +8,17 @@ from ultralytics import YOLO
 from roboflow import Roboflow
 import torch
 
-cap = cv2.VideoCapture(0)
-# cap.set(3, 1280)  # 3 = width
-# cap.set(4, 720)  # 4 = height
-cap.set(3, 600)  # 3 = width
-cap.set(4, 400)  # 4 = height
+cap = cv2.VideoCapture(2)
+cap.set(3, 1280)  # 3 = width
+cap.set(4, 720)  # 4 = height
+# cap.set(3, 600)  # 3 = width
+# cap.set(4, 400)  # 4 = height
+# cv2.CAP_DSHOW
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
+# width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+# height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+# print(width, height)
 
 # rf_box = Roboflow(api_key="cIMps5GQKQXOUmHb153T")
 # project_box = rf_box.workspace().project("box-object-detection")
@@ -21,8 +27,8 @@ cap.set(4, 400)  # 4 = height
 model_box = YOLO('BDM\\best.pt')
 classNames = ['box']
 
-model_barcode = YOLO('BDSM\\best.pt')
-classNames = ['0']
+# model_barcode = YOLO('BDSM\\best.pt')
+# classNames = ['0']
 
 # variables for box photo & barcode photo
 box_capture = True
@@ -30,8 +36,10 @@ barcode_capture = True
 
 while True:
     success, img = cap.read()
-    # results = model_box(img, stream=True)
-    results = model_barcode(img, stream=True)
+    img = img[00:400,00:600]
+    # img = cv2.resize(img, (600, 400))
+    results = model_box(img, stream=True)
+    # results = model_barcode(img, stream=True)
     for r in results:
         boxes = r.boxes
         for box in boxes:
@@ -39,15 +47,6 @@ while True:
             x1, y1, x2, y2 = box.xyxy[0]
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
             print(x1, y1, x2, y2)
-            # if (conf >= 0.7):
-            #     cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
-
-            # above is for normal rectangle below is for rounded rectangle
-
-            # x1, y1, x2, y2 = box.xyxy[0]
-            # w, h = x2-x1, y2-y1
-            # bbox= int(x1), int(y1), int(w), int(h)
-            # cvzone.cornerRect(img, (x1, y1, w, h))
 
             # Confidence level
             conf = math.ceil((box.conf[0] * 100)) / 100
@@ -61,6 +60,13 @@ while True:
             if(conf >= 0.5):
                 cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
                 cvzone.putTextRect(img, f'{classNames[cls]} {conf}', (max(0, x1), max(0, y1)), scale=0.5, thickness=1)
+                # calculations for sending stuff to robot
+                # for sending center point to robot
+                x_center = int((x1+x2)/2)
+                y_center = int((y1+y2)/2)
+                image = cv2.circle(img, (x_center,y_center), radius=0, color=(255, 0, 0), thickness=8)
+                x_robot = int(300 - x_center)
+                y_robot = int(400 - y_center)
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) == ord('q'):
