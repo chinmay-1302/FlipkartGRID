@@ -7,6 +7,14 @@ import ultralytics
 from ultralytics import YOLO
 from roboflow import Roboflow
 import torch
+import serial
+
+SerialObj = serial.Serial('COM08') # COMxx  format on Windows
+SerialObj.baudrate = 9600  # set Baud rate to 9600
+SerialObj.bytesize = 8   # Number of data bits = 8
+SerialObj.parity  ='N'   # No parity
+SerialObj.stopbits = 1   # Number of Stop bits = 1
+time.sleep(3)
 
 cap = cv2.VideoCapture(2)
 cap.set(3, 1280)  # 3 = width
@@ -67,6 +75,7 @@ while True:
                 image = cv2.circle(img, (x_center,y_center), radius=0, color=(255, 0, 0), thickness=8)
                 x_robot = int(300 - x_center)
                 y_robot = int(400 - y_center)
+                SerialObj.write(x_robot) #transmit 'A' (8bit) to micro/Arduino
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) == ord('q'):
@@ -74,3 +83,4 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+SerialObj.close() # Close the port
