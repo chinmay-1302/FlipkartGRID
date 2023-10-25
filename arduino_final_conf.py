@@ -16,7 +16,7 @@ SerialObj.parity  ='N'   # No parity
 SerialObj.stopbits = 1   # Number of Stop bits = 1
 time.sleep(3)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 cap.set(3, 1280)  # 3 = width
 cap.set(4, 720)  # 4 = height
 # cap.set(3, 600)  # 3 = width
@@ -75,12 +75,14 @@ while True:
                 image = cv2.circle(img, (x_center,y_center), radius=0, color=(255, 0, 0), thickness=8)
                 x_robot = int((300 - x_center)/10)
                 y_robot = int((400 - y_center)/10)
+                print(f'x-robot is: {x_robot} & y-robot is: {y_robot}')
                 # SerialObj.write(x_robot) #transmit 'A' (8bit) to micro/Arduino
-                SerialObj.write((str(x_robot) + " " + str(y_robot)).encode())
+                SerialObj.write((str(x_robot) + " " + str(y_robot) + " " + str(0)).encode())
                 print((str(x_robot) + " " + str(y_robot)).encode())
                 res = SerialObj.readline()
                 print(res)
                 time.sleep(10)
+            break
 
         cv2.imshow("Image", img)
         if cv2.waitKey(1) == ord('q'):
