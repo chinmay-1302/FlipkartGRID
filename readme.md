@@ -3,11 +3,11 @@
 This repo is to maintain the DL models & python application of our team for the Flipkart GRID 5.0 - Robotics Challenge
 
 ### 💻 Tech Stack
-- PyTorch
-- OpenCV
-- YOLOv8
-- Roboflow
-- Arduino
+- [PyTorch](https://pytorch.org/)
+- [OpenCV](https://opencv.org/)
+- [YOLOv8](https://docs.ultralytics.com/)
+- [Roboflow](https://roboflow.com/)
+- [Arduino](https://www.arduino.cc/)
 
 ### 🧠 Models
 - Box Detection Model
