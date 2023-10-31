@@ -36,7 +36,7 @@ cap.set(4, 720)  # 4 = height
 model_box = YOLO('BDM\\best.pt')
 classNames = ['box']
 
-# model_barcode = YOLO('BDSM\\best.pt')
+# model_barcode = YOLO('BCDM\\best.pt')
 # classNames = ['0']
 
 # variables for box photo & barcode photo

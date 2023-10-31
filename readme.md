@@ -36,14 +36,14 @@ This repo is to maintain the DL models & python application of our team for the 
 07. BDM sends the XY coordinates of the "Best Box" to Arduino
 08. Wait till the robot lifts the "Best Box" and sends a response back to python application using Arduino
 09. When response is received, OpenCV takes snapshot of the lifted "Best Box"
-10. Box snapshot is passed to Barcode Detection Model (BDSM)
-11. BDSM detects if the upper side of the box contains the barcode or not and stores the result as True or False
+10. Box snapshot is passed to Barcode Detection Model (BCDM)
+11. BCDM detects if the upper side of the box contains the barcode or not and stores the result as True or False
 12. If False, then
-    1. BDSM sends a signal to Arduino for rotating the box
+    1. BCDM sends a signal to Arduino for rotating the box
     2. Wait till the robot rotates the box and sends a response back to python application using Arduino
     3. When response is received, OpenCV takes snapshot of the new upper side of box
     4. Go to step 10
-13. If True, then BDSM sends a True signal to Arduino for placing the Box on conveyer belt
+13. If True, then BCDM sends a True signal to Arduino for placing the Box on conveyer belt
 14. Wait till the robot places the "Best Box" on conveyer belt and sends a response back to python application using Arduino
 15. Go to step 3
 16. End application
