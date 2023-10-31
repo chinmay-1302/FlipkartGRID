@@ -86,7 +86,7 @@ while True:
                 # res = SerialObj.readline()
                 # print(res)
                 # time.sleep(10)
-            break
+            # break
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) == ord('q'):
