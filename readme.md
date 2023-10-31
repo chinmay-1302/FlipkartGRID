@@ -3,6 +3,7 @@
 This repo is to maintain the DL models & python application of our team for the Flipkart GRID 5.0 - Robotics Challenge
 
 ### 💻 Tech Stack
+- PyTorch
 - OpenCV
 - YOLOv8
 - Roboflow
@@ -50,13 +51,19 @@ This repo is to maintain the DL models & python application of our team for the 
 15. Go to step 3
 16. End application
 
+### 📌 Setup
+- Clone this repository
+- Open the file `main.py`
+- Change the video stream port number in line 8 to the port number of your video stream
+- Run the file `main.py`
+
 ### 📚 References
 - [Train Custom Model from scratch on Roboflow](https://docs.roboflow.com/train/train/train-from-scratch)
 - [YOLOv8 Object Detection on a Custom Dataset](https://blog.roboflow.com/how-to-train-yolov8-on-a-custom-dataset/)
 <!-- - [Box Detection Model - Roboflow](https://universe.roboflow.com/university-of-heidelberg/box-object-detection)
 - [Barcode Detection Model - Roboflow](https://universe.roboflow.com/uniqueidwarehouse-xcp0o/barc_det) -->
 
-### 💀 Unstable Stuff
+### ⚠ Unstable Stuff
 - Run this in cmd for getting [support for opencv2's imshow](https://stackoverflow.com/questions/40207011/opencv-not-working-properly-with-python-on-linux-with-anaconda-getting-error-th):
     ```
     pip install opencv-contrib-python
